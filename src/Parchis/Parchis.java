@@ -6,13 +6,12 @@ public class Parchis {
 	private Tablero tablero;
 	private List<Jugador> jugadores;
 	private Dado dado;
-	private Iterador iterador;
+	
 	
 	public Parchis() {
 		tablero = Tablero.crearInstacia();
 		jugadores = new ArrayList<Jugador>();
 		dado = Dado.crearDado();
-		iterador = new Iterador(tablero);
 	}
 	
 	public void addJugador(){
@@ -42,23 +41,11 @@ public class Parchis {
 		
 	}
 	
-	public void imprimirLocalizacionFichasJugador(Color color) {
-		ArrayList<Casilla> listaFichasJugador = this.iterador.recorrer(color);
-		System.out.println("Tienes "+ listaFichasJugador.size() + " en juego");
-		System.out.println("Tu jugador tiene las fichas en: \n");
-		
-		/**for(Casilla item : listaFichasJugador) {
-			System.out.println("Ficha en casilla: " + item.getPosicionActual() + "\n");
-		}**/
-		
-		for(int i = 0; i < listaFichasJugador.size(); i++) {
-			System.out.println("Ficha " + (i+1) + " en casilla: " + listaFichasJugador.get(i).getPosicionActual() + "\n");
-		}
-	}
+	
 	
 	public void play() {
 		boolean finished = false;
-		imprimirLocalizacionFichasJugador(Color.ROJO);
+		jugadores.get(0).imprimirLocalizacionFichasJugador();
 		/*while(!finished){
 			
 		}*/

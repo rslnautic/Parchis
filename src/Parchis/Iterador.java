@@ -4,32 +4,54 @@ import java.util.*;
 
 public class Iterador {
 	private Tablero tablero;
+	private int indice;
 	
-	public Iterador(Tablero tablero) {
-		this.tablero = tablero;
+	public Iterador() {
+		this.tablero = Tablero.crearInstacia();
+		this.indice = -1;
 	}
 	
 	public ArrayList<Casilla> recorrer(Color color) {
 		ArrayList<Casilla> casillas = new ArrayList<Casilla>();
+		Casilla casillaActual = null;
 		
-		for(int i = 0; i<tablero.getCasillasBlancas().size(); i++) {
-			Casilla casillaActual = tablero.getCasillasBlancas().get(i); // ahsdb[i]
+		while(hayMas()) {
+			casillaActual = siguienteCasilla();
 			if(casillaActual.getFichas().size() != 0)
-			{	//if (casillaActual.getFichas().get(0).getColor().equals(color)) {
+			{	if (casillaActual.getFichas().get(0).getColor().equals(color)) {
 					casillas.add(casillaActual);
-				//}
+				}
 			}
-		}
-		
-		for(int i = 0; i<tablero.getPasillo().size(); i++) {
-			Casilla casillaActual = tablero.getPasillo().get(i);
-			if(casillaActual.getFichas().size() != 0)
-			{
-				//if (casillaActual.getFichas().get(0).getColor() == color) {
-					casillas.add(casillaActual);
-				//}
-			}
-		}
+		} 
 		return casillas;
+	}
+	
+	public Casilla siguienteCasilla() {
+		Casilla aux = null;
+		int indicePasillo = this.indice-this.tablero.getCasillasBlancas().size()+1;
+		int sizeAll = this.tablero.getCasillasBlancas().size()+this.tablero.getPasillo().size();
+		this.indice++;
+		
+		if(this.indice<this.tablero.getCasillasBlancas().size()) {
+			System.out.println("añadido1 "+indice);
+			aux = this.tablero.getCasillasBlancas().get(this.indice);
+		} else if(this.indice>=this.tablero.getCasillasBlancas().size() && this.indice<sizeAll){
+			if(indicePasillo<this.tablero.getPasillo().size()) {
+				System.out.println("añadido2"+indicePasillo);
+				aux = this.tablero.getPasillo().get(indicePasillo);
+			}
+		}
+		return aux;
+	}
+	
+	public boolean hayMas() {
+		boolean haymas;
+		int sizeAll = this.tablero.getCasillasBlancas().size()+this.tablero.getPasillo().size();
+		if(this.indice<sizeAll-1) {
+			haymas = true;
+		} else {
+			haymas = false;
+		}
+		return haymas;
 	}
 }
