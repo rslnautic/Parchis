@@ -4,22 +4,20 @@ import java.util.*;
 
 public class Parchis {
 	private Tablero tablero;
-	private List<Jugador> jugadores;
+	private Jugador jugador;
 	private Dado dado;
 	private Iterador iterator;
 	private int resultadoDado;
 	private int cantidadDe6;
 	
-	Jugador jugador = null;
 	
 	
 	
 	public Parchis() {
 		tablero = Tablero.crearInstacia();
-		jugadores = new ArrayList<Jugador>();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
-		jugador = new Jugador(Color.ROJO);
+		addJugador();
 	}
 	
 	public void addJugador(){
@@ -42,10 +40,10 @@ public class Parchis {
 		case 4: jaux = new Jugador(Color.VERDE);
 		System.out.println("Has elegido el color verde.\n");
 			break;
-		default: System.out.println("que coño haces");
+		default: System.out.println("que haces");
 		addJugador();
 		}
-		jugadores.add(jaux);
+		this.jugador = jaux;
 		sc.close();
 	}
 	
@@ -58,14 +56,16 @@ public class Parchis {
 	
 	public void play() {
 		
-		while(!end()){
+		while(!end())
 			System.out.println("Tira el dado");
 			//CIN PARA TIRAR DADO
 			resultadoDado = dado.tirarDado();
 			
 			System.out.println("Has sacado:" + resultadoDado);
-			if(resultadoDado == 5 && this.iterator.recorrer(Color.ROJO).size() <= 4){
-				this.tablero.addFicha(38, jugador.getColor());
+			if(resultadoDado == 5 && this.iterator.recorrer(jugador.getColor()).size() <= 4){
+				this.tablero.addFicha(jugador.getColor());
+				
+				
 			}else{
 				jugador.imprimirLocalizacionFichasJugador();
 				ArrayList<Casilla> listaFichasJugador = this.iterator.recorrer(jugador.getColor());
@@ -74,7 +74,7 @@ public class Parchis {
 				this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getFichas().get(0), listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), resultadoDado);
 			}
 		}
-	}
+	
 	
 	
 	public boolean end() {

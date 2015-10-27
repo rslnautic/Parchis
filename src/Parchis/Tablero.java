@@ -83,25 +83,40 @@ public class Tablero {
 		}
 	}
 	
-	public void addFicha(int posicion, Color color) {
-		FabricaAbstractaFichas fabrica = new FabricaFichasRoja();;
-		Ficha ficha = fabrica.crearFicha(); 
-		ArrayList<Ficha> fichas = new ArrayList<Ficha>(4);
-		fichas.add(ficha);
-		posicion--;
-		switch(color) {
-			case ROJO: this.casillasBlancas.get(posicion).setFichas(fichas);
-				break;
-			case AMARILLO:
-				break;
-			case AZUL:
-				break;
-			case VERDE:
-				break;
-			default:
-				break;
-		}
-	}
+	public void addFicha(Color color) {
+		  FabricaAbstractaFichas fabrica;
+		  Ficha ficha;
+		  ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+		  
+		  switch(color) {
+		   case ROJO: 
+		    fabrica = new FabricaFichasRoja();
+		    ficha = fabrica.crearFicha(); 
+		    fichas.add(ficha);
+		    this.casillasBlancas.get(37).setFichas(fichas);
+		    break;
+		   case AMARILLO:
+		    fabrica = new FabricaFichasAmarilla();
+		    ficha = fabrica.crearFicha(); 
+		    fichas.add(ficha);
+		    this.casillasBlancas.get(3).setFichas(fichas);
+		    break;
+		   case AZUL:
+		    fabrica = new FabricaFichasAzul();
+		    ficha = fabrica.crearFicha(); 
+		    fichas.add(ficha);
+		    this.casillasBlancas.get(20).setFichas(fichas);
+		    break;
+		   case VERDE:
+		    fabrica = new FabricaFichasVerde();
+		    ficha = fabrica.crearFicha(); 
+		    fichas.add(ficha);
+		    this.casillasBlancas.get(54).setFichas(fichas);
+		    break;
+		   default:
+		    break;
+		  }
+		 }
 	
 	public void moverFicha(Ficha ficha, int posicion, int nDado){
 		
