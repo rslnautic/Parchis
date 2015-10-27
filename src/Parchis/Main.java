@@ -3,9 +3,9 @@ package Parchis;
 
 public class Main {
 	public static void main(String[] args) {
+		System.out.println("polln");
 		Parchis parchis = new Parchis();
-		//Añadir Jugadores con factoria;
-		//parchis.addJugador();
-		//parchis.play();
+		parchis.addJugador();
+		parchis.play();
 	}
 }

@@ -2,11 +2,9 @@ package Parchis;
 
 public class Ficha {
 	private Color color;
-	private int numero;
 	
-	public Ficha(Color c1, int n){
+	public Ficha(Color c1){
 		this.color = c1;
-		this.numero = n;
 	}
 	
 	
@@ -14,13 +12,11 @@ public class Ficha {
 	public Color getColor() {
 		return color;
 	}
+}
 
-
-
-	public enum Color{
-		AMARILLO,
-		ROJO,
-		VERDE,
-		AZUL
-	}
+enum Color{
+	AMARILLO,
+	ROJO,
+	VERDE,
+	AZUL
 }

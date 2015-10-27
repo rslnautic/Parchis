@@ -5,12 +5,15 @@ public class Jugador {
 	private int posicionFicha2;
 	private int posicionFicha3;
 	private int posicionFicha4;
+	private Color color;
 	
-	public Jugador(){
-		posicionFicha1 = -1;
-		posicionFicha2 = 0;
-		posicionFicha3 = 0;
-		posicionFicha4 = 0;
+	
+	public Jugador(Color c1){
+		this.color = c1;
+	}
+
+	public Color getColor() {
+		return color;
 	}
 
 	public int getPosicionFicha1() {
