@@ -44,6 +44,8 @@ public class Parchis {
 	
 	public void imprimirLocalizacionFichasJugador(Color color) {
 		ArrayList<Casilla> listaFichasJugador = this.iterador.recorrer(color);
+		System.out.println("Tienes "+ listaFichasJugador.size() + " en juego");
+		System.out.println("Tu jugador tiene las fichas en: \n");
 		for(Casilla item : listaFichasJugador) {
 			System.out.println("Ficha en casilla: " + item.getPosicionActual() + "\n");
 		}

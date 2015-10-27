@@ -14,7 +14,7 @@ public class Iterador {
 		
 		for(int i = 0; i<tablero.getCasillasBlancas().size(); i++) {
 			Casilla casillaActual = tablero.getCasillasBlancas().get(i);
-			if(casillaActual.getFichas() != null)
+			if(casillaActual.getFichas().size() != 0)
 			{
 				casillas.add(casillaActual);
 			}
@@ -22,7 +22,7 @@ public class Iterador {
 		
 		for(int i = 0; i<tablero.getPasillo().size(); i++) {
 			Casilla casillaActual = tablero.getPasillo().get(i);
-			if(casillaActual.getFichas() != null)
+			if(casillaActual.getFichas().size() != 0)
 			{
 				casillas.add(casillaActual);
 			}

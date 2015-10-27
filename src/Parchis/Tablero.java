@@ -46,18 +46,18 @@ public class Tablero {
 		Ficha ficha;
 		fabrica = new FabricaFichasRoja();
 		ficha = fabrica.crearFicha();
-		ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+		ArrayList<Ficha> fichas = new ArrayList<Ficha>(4);
 		fichas.add(ficha);
 		
 		casillasBlancas = new ArrayList<Casilla>(68);
 		
 		for(int i=0; i<68; i++){
 			Casilla aux;
-			if(i==(3 | 20 | 37 | 54)) {
+			if(i==3 || i==20 || i==37 || i==54) {
 				aux = new Casilla(TipoCasilla.SALIDA, i+1); 
-			} else if (i==( 12 | 29 | 46 | 63) ){
+			} else if (i== 12 || i==29 || i==46 || i==63){
 				aux = new Casilla(TipoCasilla.SEGURO, i+1); 
-			} else if (i==( 67 | 16 | 33 | 50) ){
+			} else if (i== 67 || i==16 || i==33 || i==50){
 				aux = new Casilla(TipoCasilla.ENTRADA, i+1);
 				aux.setFichas(fichas);
 			}else {
@@ -65,9 +65,6 @@ public class Tablero {
 			}
 			casillasBlancas.add(aux); 
 		}
-		
-		//METEMOS FICHAS PARA TESTEAR ITERADOR
-		
 	}
 	
 	public void crearPasillo() {
