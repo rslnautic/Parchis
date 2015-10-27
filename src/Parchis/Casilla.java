@@ -20,7 +20,16 @@ public class Casilla {
 		}
 		
 	}
+	
+	public void borrarFicha(Ficha ficha){
+		this.fichas.remove(ficha);
+	}
 
+	public void ponerFicha(Ficha ficha){
+		
+		this.fichas.add(ficha);
+		
+	}
 
 	public List<Ficha> getFichas() {
 		return fichas;

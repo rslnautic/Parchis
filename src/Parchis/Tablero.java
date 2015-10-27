@@ -43,12 +43,12 @@ public class Tablero {
 	public void crearBlancas() {
 		
 		//test
-		FabricaAbstractaFichas fabrica;
+		/*FabricaAbstractaFichas fabrica;
 		Ficha ficha;
 		fabrica = new FabricaFichasRoja();
 		ficha = fabrica.crearFicha();
 		ArrayList<Ficha> fichas = new ArrayList<Ficha>(4);
-		fichas.add(ficha);
+		fichas.add(ficha);*/
 		//end test
 		
 		casillasBlancas = new ArrayList<Casilla>(68);
@@ -61,9 +61,8 @@ public class Tablero {
 				aux = new Casilla(TipoCasilla.SEGURO, i+1); 
 			} else if (i== 67 || i==16 || i==33 || i==50){
 				aux = new Casilla(TipoCasilla.ENTRADA, i+1);
-				
 				//test
-				aux.setFichas(fichas);
+				//aux.setFichas(fichas);
 			}else {
 				aux = new Casilla(TipoCasilla.NORMAL, i+1); 		
 			}
@@ -82,5 +81,34 @@ public class Tablero {
 			}
 			pasillo.add(aux);
 		}
+	}
+	
+	public void addFicha(int posicion, Color color) {
+		FabricaAbstractaFichas fabrica = new FabricaFichasRoja();;
+		Ficha ficha = fabrica.crearFicha(); 
+		ArrayList<Ficha> fichas = new ArrayList<Ficha>(4);
+		fichas.add(ficha);
+		posicion--;
+		switch(color) {
+			case ROJO: this.casillasBlancas.get(posicion).setFichas(fichas);
+				break;
+			case AMARILLO:
+				break;
+			case AZUL:
+				break;
+			case VERDE:
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public void moverFicha(Ficha ficha, int posicion, int nDado){
+		
+		this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
+		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
+			
+		
+		
 	}
 }

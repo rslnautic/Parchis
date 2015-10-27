@@ -33,11 +33,9 @@ public class Iterador {
 		this.indice++;
 		
 		if(this.indice<this.tablero.getCasillasBlancas().size()) {
-			System.out.println("añadido1 "+indice);
 			aux = this.tablero.getCasillasBlancas().get(this.indice);
 		} else if(this.indice>=this.tablero.getCasillasBlancas().size() && this.indice<sizeAll){
 			if(indicePasillo<this.tablero.getPasillo().size()) {
-				System.out.println("añadido2"+indicePasillo);
 				aux = this.tablero.getPasillo().get(indicePasillo);
 			}
 		}
