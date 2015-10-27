@@ -7,8 +7,6 @@ public class Ficha {
 		this.color = c1;
 	}
 	
-	
-	
 	public Color getColor() {
 		return color;
 	}

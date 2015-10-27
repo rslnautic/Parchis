@@ -13,10 +13,11 @@ public class Iterador {
 		ArrayList<Casilla> casillas = new ArrayList<Casilla>();
 		
 		for(int i = 0; i<tablero.getCasillasBlancas().size(); i++) {
-			Casilla casillaActual = tablero.getCasillasBlancas().get(i);
+			Casilla casillaActual = tablero.getCasillasBlancas().get(i); // ahsdb[i]
 			if(casillaActual.getFichas().size() != 0)
-			{
-				casillas.add(casillaActual);
+			{	//if (casillaActual.getFichas().get(0).getColor().equals(color)) {
+					casillas.add(casillaActual);
+				//}
 			}
 		}
 		
@@ -24,7 +25,9 @@ public class Iterador {
 			Casilla casillaActual = tablero.getPasillo().get(i);
 			if(casillaActual.getFichas().size() != 0)
 			{
-				casillas.add(casillaActual);
+				//if (casillaActual.getFichas().get(0).getColor() == color) {
+					casillas.add(casillaActual);
+				//}
 			}
 		}
 		return casillas;

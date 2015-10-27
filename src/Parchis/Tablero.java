@@ -1,7 +1,6 @@
 package Parchis;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class Tablero {
@@ -42,12 +41,15 @@ public class Tablero {
 	}
 	
 	public void crearBlancas() {
+		
+		//test
 		FabricaAbstractaFichas fabrica;
 		Ficha ficha;
 		fabrica = new FabricaFichasRoja();
 		ficha = fabrica.crearFicha();
 		ArrayList<Ficha> fichas = new ArrayList<Ficha>(4);
 		fichas.add(ficha);
+		//end test
 		
 		casillasBlancas = new ArrayList<Casilla>(68);
 		
@@ -59,6 +61,8 @@ public class Tablero {
 				aux = new Casilla(TipoCasilla.SEGURO, i+1); 
 			} else if (i== 67 || i==16 || i==33 || i==50){
 				aux = new Casilla(TipoCasilla.ENTRADA, i+1);
+				
+				//test
 				aux.setFichas(fichas);
 			}else {
 				aux = new Casilla(TipoCasilla.NORMAL, i+1); 		
@@ -79,6 +83,4 @@ public class Tablero {
 			pasillo.add(aux);
 		}
 	}
-		
-	
 }

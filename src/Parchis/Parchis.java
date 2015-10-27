@@ -46,8 +46,13 @@ public class Parchis {
 		ArrayList<Casilla> listaFichasJugador = this.iterador.recorrer(color);
 		System.out.println("Tienes "+ listaFichasJugador.size() + " en juego");
 		System.out.println("Tu jugador tiene las fichas en: \n");
-		for(Casilla item : listaFichasJugador) {
+		
+		/**for(Casilla item : listaFichasJugador) {
 			System.out.println("Ficha en casilla: " + item.getPosicionActual() + "\n");
+		}**/
+		
+		for(int i = 0; i < listaFichasJugador.size(); i++) {
+			System.out.println("Ficha " + (i+1) + " en casilla: " + listaFichasJugador.get(i).getPosicionActual() + "\n");
 		}
 	}
 	
