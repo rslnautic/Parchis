@@ -1,5 +1,6 @@
 package Parchis;
 import java.util.*;
+import java.io.*;
 
 
 public class Casilla {
@@ -53,7 +54,6 @@ public class Casilla {
 	public int getPosicionActual() {
 		return posicionActual;
 	}
-
 
 	public void setPosicionActual(int posicionActual) {
 		this.posicionActual = posicionActual;

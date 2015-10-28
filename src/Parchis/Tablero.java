@@ -120,11 +120,11 @@ public class Tablero {
 	public void moverFicha(Ficha ficha, int posicion, int nDado){
 		this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
 		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
+		
 	}
 	
 	public void borrarFicha(int posicion) {
-		Casilla aux = this.casillasBlancas.get(posicion-1);
-		aux.borrarFicha(aux.getFichas().get(0));
+		this.casillasBlancas.get(posicion-1).borrarFicha(this.casillasBlancas.get(posicion-1).getFichas().get(0));
 	}
 
 	public int getFichasEnJuego() {

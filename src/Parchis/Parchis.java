@@ -12,7 +12,6 @@ public class Parchis {
 	
 	
 	
-	
 	public Parchis() {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
@@ -50,22 +49,17 @@ public class Parchis {
 		
 		while(!end()) {
 			System.out.println("Tira el dado");
-			//CIN PARA TIRAR DADO
+			Scanner sc = new Scanner(System.in);
+			sc.next();
 			resultadoDado = dado.tirarDado();
-			listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
-			
-			System.out.println("Has sacado:" + resultadoDado);
-			System.out.println(this.tablero.getFichasEnJuego());
 			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
 				this.tablero.addFicha(jugador.getColor());
 			}else{
-				System.out.println("Fichas en juego" + this.tablero.getFichasEnJuego());
-				if(this.tablero.getFichasEnJuego()!=0) {
-					int eleccion;
+				if(this.tablero.getFichasEnJuego()>0) {
 					jugador.imprimirLocalizacionFichasJugador();
 					listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
-					eleccion = this.jugador.eleccion();
-					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), 38, resultadoDado);
+					int eleccion = this.jugador.eleccion();
+					this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
 					
 				}
 				

@@ -49,6 +49,7 @@ public class Iterador {
 			haymas = true;
 		} else {
 			haymas = false;
+			this.indice = -1;
 		}
 		return haymas;
 	}

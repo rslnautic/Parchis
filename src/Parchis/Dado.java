@@ -6,9 +6,11 @@ import java.util.Random;
 
 	public class Dado {
 		private static Dado _instanciaDado = null;
+		Random random;
 		
 		private Dado() {
-			
+			random = new Random();
+			random.setSeed(new Date().getTime());
 		}
 		
 		public static Dado crearDado() {
@@ -18,9 +20,9 @@ import java.util.Random;
 			return _instanciaDado;
 		}
 		public int tirarDado() {
-			Random dado = new Random();
-			dado.setSeed(new Date().getTime());
-			return dado.nextInt(6)+1;
+			int n = random.nextInt(6)+1;
+			System.out.println("Has sacado:" + n);
+			return n;
 		}
 	}
 
