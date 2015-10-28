@@ -8,6 +8,7 @@ public class Tablero {
 	
 	private List<Casilla> casillasBlancas;
 	private List<Casilla> pasillo;
+	private int fichasEnJuego;
 	/**private List<Casilla> pasilloVerde;
 	private List<Casilla> pasilloAmarillo;
 	private List<Casilla> pasilloAzul;**/
@@ -15,6 +16,7 @@ public class Tablero {
 	private Tablero() {
 		crearBlancas();
 		crearPasillo();
+		fichasEnJuego = 0;
 	}
 	
 	public List<Casilla> getCasillasBlancas() {
@@ -86,44 +88,49 @@ public class Tablero {
 	public void addFicha(Color color) {
 		  FabricaAbstractaFichas fabrica;
 		  Ficha ficha;
-		  ArrayList<Ficha> fichas = new ArrayList<Ficha>();
 		  
 		  switch(color) {
 		   case ROJO: 
 		    fabrica = new FabricaFichasRoja();
 		    ficha = fabrica.crearFicha(); 
-		    fichas.add(ficha);
-		    this.casillasBlancas.get(37).setFichas(fichas);
+		    this.casillasBlancas.get(37).ponerFicha(ficha);
 		    break;
 		   case AMARILLO:
 		    fabrica = new FabricaFichasAmarilla();
 		    ficha = fabrica.crearFicha(); 
-		    fichas.add(ficha);
-		    this.casillasBlancas.get(3).setFichas(fichas);
+		    this.casillasBlancas.get(3).ponerFicha(ficha);
 		    break;
 		   case AZUL:
 		    fabrica = new FabricaFichasAzul();
 		    ficha = fabrica.crearFicha(); 
-		    fichas.add(ficha);
-		    this.casillasBlancas.get(20).setFichas(fichas);
+		    this.casillasBlancas.get(20).ponerFicha(ficha);
 		    break;
 		   case VERDE:
 		    fabrica = new FabricaFichasVerde();
 		    ficha = fabrica.crearFicha(); 
-		    fichas.add(ficha);
-		    this.casillasBlancas.get(54).setFichas(fichas);
+		    this.casillasBlancas.get(54).ponerFicha(ficha);
 		    break;
 		   default:
 		    break;
 		  }
+		  
+		  this.fichasEnJuego++;
 		 }
 	
 	public void moverFicha(Ficha ficha, int posicion, int nDado){
-		
 		this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
 		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
-			
-		
-		
+	}
+	
+	public void borrarFicha() {
+		fichasEnJuego--;
+	}
+
+	public int getFichasEnJuego() {
+		return fichasEnJuego;
+	}
+
+	public void setFichasEnJuego(int fichasEnJuego) {
+		this.fichasEnJuego = fichasEnJuego;
 	}
 }

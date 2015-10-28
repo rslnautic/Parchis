@@ -17,12 +17,12 @@ public class Parchis {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
-		addJugador();
+		//addJugador();
 	}
 	
 	public void addJugador(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Bienvenido al Parchis de tu vieja\n¿Con que color quieres jugar?\n");
+		System.out.println("Bienvenido al Parchis\n¿Con que color quieres jugar?\n");
 		System.out.println("1.Rojo\n2.Azul\n3.Amarillo\n4.Verde\n");
 		int i = -1;
 		i = sc.nextInt();
@@ -47,33 +47,36 @@ public class Parchis {
 		sc.close();
 	}
 	
-	public void inicio(){
-		
-	}
-	
-	
-	
-	
 	public void play() {
+		ArrayList<Casilla> listaCasillasConFichas;
+		this.jugador = new Jugador(Color.ROJO);
 		
-		while(!end())
+		while(!end()) {
 			System.out.println("Tira el dado");
 			//CIN PARA TIRAR DADO
 			resultadoDado = dado.tirarDado();
+			listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
 			
 			System.out.println("Has sacado:" + resultadoDado);
-			if(resultadoDado == 5 && this.iterator.recorrer(jugador.getColor()).size() <= 4){
+			System.out.println(this.tablero.getFichasEnJuego());
+			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
 				this.tablero.addFicha(jugador.getColor());
-				
-				
 			}else{
-				jugador.imprimirLocalizacionFichasJugador();
-				ArrayList<Casilla> listaFichasJugador = this.iterator.recorrer(jugador.getColor());
+				System.out.println("Fichas en juego" + this.tablero.getFichasEnJuego());
+				if(this.tablero.getFichasEnJuego()!=0) {
+					int eleccion;
+					jugador.imprimirLocalizacionFichasJugador();
+					listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
+					eleccion = this.jugador.eleccion();
+					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), 38, resultadoDado);
+					
+				}
 				
 				//this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), jugador.getColor(), resultadoDado);
-				this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getFichas().get(0), listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), resultadoDado);
+				
 			}
 		}
+	}
 	
 	
 	

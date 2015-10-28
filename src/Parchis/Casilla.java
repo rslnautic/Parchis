@@ -26,7 +26,6 @@ public class Casilla {
 	}
 
 	public void ponerFicha(Ficha ficha){
-		
 		this.fichas.add(ficha);
 		
 	}
