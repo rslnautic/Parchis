@@ -17,7 +17,6 @@ public class Parchis {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
-		//addJugador();
 	}
 	
 	public void addJugador(){
@@ -44,12 +43,10 @@ public class Parchis {
 		addJugador();
 		}
 		this.jugador = jaux;
-		sc.close();
 	}
 	
 	public void play() {
 		ArrayList<Casilla> listaCasillasConFichas;
-		this.jugador = new Jugador(Color.ROJO);
 		
 		while(!end()) {
 			System.out.println("Tira el dado");

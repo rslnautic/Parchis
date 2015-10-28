@@ -44,10 +44,8 @@ public class Jugador {
 		if(i<=4) {
 			return i;
 		} else {
-			eleccion();
+			return eleccion();
 		}
-		scc.close();
-		return i;
 	}
 
 	public int getFichasEnJuego() {

@@ -122,8 +122,9 @@ public class Tablero {
 		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
 	}
 	
-	public void borrarFicha() {
-		fichasEnJuego--;
+	public void borrarFicha(int posicion) {
+		Casilla aux = this.casillasBlancas.get(posicion-1);
+		aux.borrarFicha(aux.getFichas().get(0));
 	}
 
 	public int getFichasEnJuego() {
