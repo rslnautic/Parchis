@@ -2,7 +2,7 @@ package Parchis;
 
 public class Ficha {
 	private Color color;
-	
+	//Constructor de Ficha que recibe el color de la misma por parámetro.
 	public Ficha(Color c1){
 		this.color = c1;
 	}

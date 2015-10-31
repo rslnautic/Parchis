@@ -11,13 +11,15 @@ public class Parchis {
 	private int cantidadDe6;
 	
 	
-	
+	//Constructor por defecto de la clase parchis.
 	public Parchis() {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
 	}
 	
+	//Método para añadir un jugador al atributo de la clase.
+	//El método pide por consola el color que el jugador elige.
 	public void addJugador(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Bienvenido al Parchis\nÂ¿Con que color quieres jugar?\n");
@@ -44,13 +46,13 @@ public class Parchis {
 		this.jugador = jaux;
 	}
 	
+	//Bucle principal del juego en el cual se suceden las tiradas del dado y se piden por consola las decisiones que el jugador puede tomar.
 	public void play() {
 		ArrayList<Casilla> listaCasillasConFichas;
 		
 		while(!end()) {
-			System.out.println("Tira el dado");
 			Scanner sc = new Scanner(System.in);
-			sc.next();
+			pressAnyKeyToContinue();
 			resultadoDado = dado.tirarDado();
 			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
 				this.tablero.addFicha(jugador.getColor());
@@ -69,16 +71,26 @@ public class Parchis {
 		}
 	}
 	
-	
+	//Funcion que comprueba si el jugador ha gando.
 	
 	public boolean end() {
 		
 		if(this.tablero.getPasillo().get(7).getFichas().size() == 4) {
+			System.out.println();
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
-	
+	//Funcion auxiliar para esperar hasta que el jugador pulse ENTER.
+	private void pressAnyKeyToContinue()
+	 { 
+	        System.out.println("Pulsa ENTER para tirar el dado.\n");
+	        try
+	        {
+	            System.in.read();
+	        }  
+	        catch(Exception e)
+	        {}  
+	 }
 }
