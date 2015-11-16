@@ -1,7 +1,13 @@
 package Parchis;
-
 import java.util.*;
 
+
+/**
+ * 
+ * @author Eduardo Terradez, RamÃ³n Serrano y CÃ©sar Gil
+ * @version 16/11/2015 v2
+ * @see <a href = "https://github.com/rslnautic/Parchis"
+ */
 /*La clase Tablero modela el tablero de parchis mediante arrays de tipo Casilla. 
  */
 public class Tablero {
@@ -19,31 +25,55 @@ public class Tablero {
 		fichasEnJuego = 0;
 	}
 	//Getters y setters
-	public List<Casilla> getCasillasBlancas() {
-		return casillasBlancas;
-	}
+	
+/**
+* Metodo que devuelve el array del pasillo principal
+* @return el array de casillas blancas
+*/	
+public List<Casilla> getCasillasBlancas() {
+	return casillasBlancas;
+}
 
-	public void setCasillasBlancas(List<Casilla> casillasBlancas) {
-		this.casillasBlancas = casillasBlancas;
-	}
+/**
+* Metodo que crea el pasillo de casillas blancas
+* @param casillasBlancas El parametro casillasBlancas define el numero de casillas blancas
+*/	
+public void setCasillasBlancas(List<Casilla> casillasBlancas) {
+	this.casillasBlancas = casillasBlancas;
+}
 
+/**
+* Metodo que devuelve el array de las celdas de tipo pasillo 
+* @return devuelve celdas de tipo pasillo 
+*/	
 	public List<Casilla> getPasillo() {
 		return pasillo;
 	}
 
+	/**
+	* Metodo que crea el array de tipo pasillo 
+	* @param pasillo el parametro pasillo define el array de casillas de tipo pasillo 
+	*/		
 	public void setPasillo(List<Casilla> pasillo) {
 		this.pasillo = pasillo;
 	}
-	/*Método estático que implementa el patrón Singleton haciendo posible la creación de una instancia
-	 * de la clase Tablero unicamente si no hay una instancia ya creada
-	 * */
+	
+	/**
+	* Metodo estatico que implementa el patron Singleton haciendo posible la creacion de una instancia
+	* de la clase Tablero unicamente si no hay una instancia ya creada
+	* @return devuelve el tablero
+	*/		
 	public static Tablero crearInstacia() {
 		if(_instanciaTablero==null) {
 			_instanciaTablero = new Tablero();
 		}
 		return _instanciaTablero;
 	}
-	//Inicializa el array de las casillas comunes y cambia su tipo en funcion del numero que sea.
+	
+/**
+* Inicializa el array de las casillas comunes y cambia su tipo en funcion del numero que sea.
+* 
+*/
 	public void crearBlancas() {
 		
 		casillasBlancas = new ArrayList<Casilla>(68);
@@ -62,7 +92,11 @@ public class Tablero {
 			casillasBlancas.add(aux); 
 		}
 	}
-	//Inicializa el pasillo y setea la ultima casilla como meta.
+	
+/**
+* Inicializa el pasillo y setea la ultima casilla como meta.
+* 
+*/	
 	public void crearPasillo() {
 		pasillo = new ArrayList<Casilla>(8);
 		for(int i= 0; i<8; i++){
@@ -75,9 +109,13 @@ public class Tablero {
 			pasillo.add(aux);
 		}
 	}
-	/*Añade una ficha nueva al jugador haciendo uso del patrón Factory usando diferentes fabricas en 
-	 función del color de la ficha a crear.
-	*/
+
+/**
+* AÃ±ade una ficha nueva al jugador haciendo uso del patron Factory usando diferentes fabricas en 
+*funcion del color de la ficha a crear. 
+*/		
+	
+
 	public void addFicha(Color color) {
 		  FabricaAbstractaFichas fabrica;
 		  Ficha ficha;
@@ -109,21 +147,35 @@ public class Tablero {
 		  
 		  this.fichasEnJuego++;
 		 }
-	//Método utilizado para mover las fichas.
+
+
+/**
+* Metodo utilizado para mover las fichas.
+*/	
 	public void moverFicha(Ficha ficha, int posicion, int nDado){
 		this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
 		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
 		
 	}
-	//Método utilizado para borrar las fichas.
+	
+	/**
+	* Metodo utilizado para borrar las fichas.
+	*/	
 	public void borrarFicha(int posicion) {
 		this.casillasBlancas.get(posicion-1).borrarFicha(this.casillasBlancas.get(posicion-1).getFichas().get(0));
 	}
-	//Getters y setters
+	
+/**
+* Metodo utilizado para mover las fichas.
+* @return las fichas que hay en juego
+*/	
 	public int getFichasEnJuego() {
 		return fichasEnJuego;
 	}
-	
+/**
+* Metodo utilizado para modificar el numero de fichas en juego
+* @param fichasEnJuego el parametro fichasEnjuego indica el numero de fichas que hay en juego 
+*/	
 	public void setFichasEnJuego(int fichasEnJuego) {
 		this.fichasEnJuego = fichasEnJuego;
 	}

@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author ramonserranolopez
+ * @author ramonserranolopez, CesarGil, EduardoTerradez
  *
  */
 package Parchis;

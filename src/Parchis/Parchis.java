@@ -2,7 +2,16 @@ package Parchis;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 
+ * @author Eduardo Terradez, Ramón Serrano y César Gil
+ * @version 16/11/2015 v2
+ * @see <a href = "https://github.com/rslnautic/Parchis"
+ */
+
+
 public class Parchis {
+	
 	private Tablero tablero;
 	private Jugador jugador;
 	private Dado dado;
@@ -10,17 +19,24 @@ public class Parchis {
 	private int resultadoDado;
 	private int cantidadDe6;
 	
+	/**
+	 * Constructor por defecto de la clase parchis.
+	 * @param ninguno 
+	 */
 	
-	//Constructor por defecto de la clase parchis.
 	public Parchis() {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
-	}
+	}// Cierre del constructor
 	
-	//M�todo para a�adir un jugador al atributo de la clase.
-	//El m�todo pide por consola el color que el jugador elige.
-	public void addJugador(){
+	
+	/**
+	 * Metodo para añadir un jugador al atributo de la clase
+	 * El método pide por consola el color que el jugador quiera
+	 * @param ninguno 
+	 */
+public void addJugador(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Bienvenido al Parchis\n¿Con que color quieres jugar?\n");
 		System.out.println("1.Rojo\n2.Azul\n3.Amarillo\n4.Verde\n");
@@ -45,8 +61,12 @@ public class Parchis {
 		}
 		this.jugador = jaux;
 	}
+	/**
+	 * Bucle principal del juego en el cual se suceden las tiradas del dado y se piden 
+	 * por consola las decisiones que el jugador puede tomar.
+	 * 
+	 */
 	
-	//Bucle principal del juego en el cual se suceden las tiradas del dado y se piden por consola las decisiones que el jugador puede tomar.
 	public void play() {
 		ArrayList<Casilla> listaCasillasConFichas;
 		
@@ -71,7 +91,10 @@ public class Parchis {
 		}
 	}
 	
-	//Funcion que comprueba si el jugador ha gando.
+	/**
+	 * Función que comprueba si el jugador ha ganado
+	 * 
+	 */
 	
 	public boolean end() {
 		
@@ -82,7 +105,11 @@ public class Parchis {
 			return false;
 		}
 	}
-	//Funcion auxiliar para esperar hasta que el jugador pulse ENTER.
+	
+	/**
+	 * Funcion auxiliar para esperar hasta que el jugador pulse ENTER.
+	 * 
+	 */
 	private void pressAnyKeyToContinue()
 	 { 
 	        System.out.println("Pulsa ENTER para tirar el dado.\n");
