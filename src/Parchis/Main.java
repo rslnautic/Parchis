@@ -10,8 +10,12 @@ package Parchis;
 
 public class Main {	
 	public static void main(String[] args) {
-		Parchis parchis = new Parchis();
+		/*Parchis parchis = new Parchis();
 		parchis.addJugador();
-		parchis.play();
+		parchis.play();*/
+		
+		Jugador asd = new Jugador(Color.ROJO);
+		asd.JugadorIA();
+		asd.Mover();
 	}
 }

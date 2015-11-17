@@ -13,6 +13,7 @@ public class Jugador {
 	private Color color;
 	private Iterador iterador;
 	private int fichasEnJuego;
+	private Contexto contexto;
 	
 /**
  * Constructor de la clase Jugador
@@ -21,7 +22,26 @@ public class Jugador {
 	public Jugador(Color c1){
 		this.color = c1;
 		this.iterador = new Iterador();
+		this.contexto = new Contexto();
 	}
+	
+	public void JugadorNormal()
+    {
+		ITipoJugador jugadorNormal = new JugadorNormal();
+		this.contexto.setTipoJugador(jugadorNormal);
+    }
+ 
+    public void JugadorIA()
+    {
+    	ITipoJugador jugadorIA = new JugadorIA();
+    	this.contexto.setTipoJugador(jugadorIA);
+    }
+    
+    public void Mover()
+    {
+        String descripcion = contexto.ObtenerDescripcion();
+        System.out.println("Tipo de jugador que se mueve " + descripcion);
+    }
 	
 /**
 * Metodo que devuelve el color de un jugador
