@@ -59,6 +59,8 @@ public void addJugador(){
 		default: System.out.println("que haces");
 		addJugador();
 		}
+		jaux.JugadorNormal();
+		//jaux.JugadorIA();
 		this.jugador = jaux;
 	}
 	/**
@@ -75,13 +77,14 @@ public void addJugador(){
 			pressAnyKeyToContinue();
 			resultadoDado = dado.tirarDado();
 			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
-				this.tablero.addFicha(jugador.getColor());
+				this.tablero.addFichaAlJuego(jugador.getColor());
 			}else{
 				if(this.tablero.getFichasEnJuego()>0) {
 					jugador.imprimirLocalizacionFichasJugador();
 					listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
 					int eleccion = this.jugador.eleccion();
-					this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
+					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
+					this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
 					
 				}
 				

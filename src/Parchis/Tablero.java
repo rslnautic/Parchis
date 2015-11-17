@@ -116,7 +116,7 @@ public void setCasillasBlancas(List<Casilla> casillasBlancas) {
 */		
 	
 
-	public void addFicha(Color color) {
+	public void addFichaAlJuego(Color color) {
 		  FabricaAbstractaFichas fabrica;
 		  Ficha ficha;
 		  
@@ -152,17 +152,37 @@ public void setCasillasBlancas(List<Casilla> casillasBlancas) {
 /**
 * Metodo utilizado para mover las fichas.
 */	
-	public void moverFicha(Ficha ficha, int posicion, int nDado){
-		this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
-		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);
-		
+	
+	//posicion por casilla en la que esta la ficha
+	//cambiar constructor con posicion y next devuelvo y luego incremento
+	public void moverFicha(Ficha ficha, Casilla casillaActual, int nDado){
+		Iterador iterator = new Iterador(casillaActual.getPosicionActual(), casillaActual.getTipoCasilla());
+		Casilla casillaDestino = null;
+		while(iterator.hayMas() && nDado >= 0) {
+			casillaDestino = iterator.siguienteCasilla();
+			nDado--;
+		}
+		casillaDestino.ponerFicha(ficha);
+		casillaActual.borrarFicha(ficha);
 	}
 	
+	/*public void moverFicha(Casilla casilla, int nDado){
+		Ficha ficha = casilla.getFichas().get(0);
+		Iterador iterator = new Iterador(casilla.getPosicionActual(), casilla.getTipoCasilla());
+		/*this.casillasBlancas.get(posicion-1+nDado).ponerFicha(ficha);
+		this.casillasBlancas.get(posicion-1).borrarFicha(ficha);*/
+		
+	//}*/
+	
 	/**
-	* Metodo utilizado para borrar las fichas.
+	* Metodo utilizado para borrar las fichas. REVISAR
 	*/	
-	public void borrarFicha(int posicion) {
+	/*public void borrarFicha(int posicion) {
 		this.casillasBlancas.get(posicion-1).borrarFicha(this.casillasBlancas.get(posicion-1).getFichas().get(0));
+	}*/
+	
+	public void borrarFicha() {
+		this.fichasEnJuego--;
 	}
 	
 /**
@@ -176,7 +196,7 @@ public void setCasillasBlancas(List<Casilla> casillasBlancas) {
 * Metodo utilizado para modificar el numero de fichas en juego
 * @param fichasEnJuego el parametro fichasEnjuego indica el numero de fichas que hay en juego 
 */	
-	public void setFichasEnJuego(int fichasEnJuego) {
+	/*public void setFichasEnJuego(int fichasEnJuego) {
 		this.fichasEnJuego = fichasEnJuego;
-	}
+	}*/
 }

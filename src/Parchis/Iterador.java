@@ -15,12 +15,24 @@ public class Iterador {
  */		
 	public Iterador() {
 		this.tablero = Tablero.crearInstacia();
-		this.indice = -1;
+		this.indice = 0;
+	}
+	
+	public Iterador(int posicion, TipoCasilla tipo) {
+		this.tablero = Tablero.crearInstacia();
+		if(tipo.equals(TipoCasilla.PASILLO)){
+			this.indice = this.tablero.getCasillasBlancas().size() + posicion-1;
+		}
+		else { 
+			this.indice = posicion-1;
+		}
+		
 	}
 	
 	public ArrayList<Casilla> recorrer(Color color) {
 		ArrayList<Casilla> casillas = new ArrayList<Casilla>();
 		Casilla casillaActual = null;
+		this.indice = 0;
 		
 		while(hayMas()) {
 			casillaActual = siguienteCasilla();
@@ -29,7 +41,8 @@ public class Iterador {
 					casillas.add(casillaActual);
 				}
 			}
-		} 
+		}
+		
 		return casillas;
 	}
 
@@ -41,7 +54,7 @@ public class Iterador {
 		Casilla aux = null;
 		int indicePasillo = this.indice-this.tablero.getCasillasBlancas().size()+1;
 		int sizeAll = this.tablero.getCasillasBlancas().size()+this.tablero.getPasillo().size();
-		this.indice++;
+		
 		
 		if(this.indice<this.tablero.getCasillasBlancas().size()) {
 			aux = this.tablero.getCasillasBlancas().get(this.indice);
@@ -50,6 +63,7 @@ public class Iterador {
 				aux = this.tablero.getPasillo().get(indicePasillo);
 			}
 		}
+		this.indice++;
 		return aux;
 	}
 /**

@@ -13,8 +13,8 @@ public class Jugador {
 	private Color color;
 	private Iterador iterador;
 	private int fichasEnJuego;
-	private Contexto contexto;
-	
+	private ITipoJugador tipoJugador;
+
 /**
  * Constructor de la clase Jugador
  * @param c1 indica el color del jugador
@@ -22,24 +22,23 @@ public class Jugador {
 	public Jugador(Color c1){
 		this.color = c1;
 		this.iterador = new Iterador();
-		this.contexto = new Contexto();
 	}
 	
 	public void JugadorNormal()
     {
 		ITipoJugador jugadorNormal = new JugadorNormal();
-		this.contexto.setTipoJugador(jugadorNormal);
+		setTipoJugador(jugadorNormal);
     }
  
     public void JugadorIA()
     {
     	ITipoJugador jugadorIA = new JugadorIA();
-    	this.contexto.setTipoJugador(jugadorIA);
+    	setTipoJugador(jugadorIA);
     }
     
     public void Mover()
     {
-        String descripcion = contexto.ObtenerDescripcion();
+        String descripcion = this.tipoJugador.ObtenerDescripcion();
         System.out.println("Tipo de jugador que se mueve " + descripcion);
     }
 	
@@ -78,15 +77,7 @@ public ArrayList<Casilla> getCasillasConFichas() {
 * @return devuelve la ficha elegida por el jugador 
 */	
 	public int eleccion(){
-		System.out.println("¿Cual quieres mover?");
-		Scanner scc = new Scanner(System.in);
-		int i = scc.nextInt(); 
-		if(i<=4) {
-			System.out.println(this.color+"- muevo la ficha numero: "+i);
-			return i;
-		} else {
-			return eleccion();
-		}
+		return this.tipoJugador.eleccion(this.color, this.fichasEnJuego);
 	}
 /**
 * Metodo que obtiene las fichas en juego
@@ -102,5 +93,13 @@ public ArrayList<Casilla> getCasillasConFichas() {
 */
 	public void setFichasEnJuego(int fichasEnJuego) {
 		this.fichasEnJuego = fichasEnJuego;
+	}
+	
+	public ITipoJugador getTipoJugador() {
+		return tipoJugador;
+	}
+
+	public void setTipoJugador(ITipoJugador tipoJugador) {
+		this.tipoJugador = tipoJugador;
 	}
 }
