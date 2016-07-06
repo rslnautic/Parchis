@@ -13,11 +13,6 @@ public class JugadorIA implements ITipoJugador{
     }
 	
 	public int eleccion(Color color, int fichasEnJuego) {
-		//Empieza aquí
-		Random rand = new Random();
-		rand.setSeed(new Date().getTime());
-		int rNumber = rand.nextInt(fichasEnJuego)+1;
-		System.out.println("IA-"+color+"- muevo la ficha numero: " + rNumber);
-		return rNumber;
+		return Vista.eleccionFichaIA(color, fichasEnJuego);
 	}
 }

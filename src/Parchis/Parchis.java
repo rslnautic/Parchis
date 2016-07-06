@@ -21,6 +21,7 @@ public class Parchis {
 	private Iterador iterator;
 	private int resultadoDado;
 	private int cantidadDe6;
+	private Vista vista;
 	
 	/**
 	 * Constructor por defecto de la clase parchis.
@@ -32,58 +33,26 @@ public class Parchis {
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
         this.jugadores = new ArrayList();
+        this.vista = new consoleView();
 	}// Cierre del constructor
 	
 	
 	/**
-	 * Metodo para añadir un jugador al atributo de la clase
-	 * El método pide por consola el color que el jugador quiera
+	 * Metodo para a�adir jugadores a la partida
+	 * El método pide por consola el color que cada jugador quiera.
 	 * @param ninguno 
 	 */
-public void addJugador(){
-		/*Scanner sc = new Scanner(System.in);
-		System.out.println("Bienvenido al Parchis\n¿Con que color quieres jugar?\n");
-		System.out.println("1.Rojo\n2.Azul\n3.Amarillo\n4.Verde\n");
-		int i = -1;
-		i = sc.nextInt();
-		Jugador jaux = null;
-		switch(i){
-		case 1: jaux = new Jugador(Color.ROJO);
-		    System.out.println("Has elegido el color rojo.\n");
-			break;
-		case 2: jaux = new Jugador(Color.AZUL);
-		    System.out.println("Has elegido el color azul.\n");
-			break;
-		case 3: jaux = new Jugador(Color.AMARILLO);
-		    System.out.println("Has elegido el color amarillo.\n");
-			break;
-		case 4: jaux = new Jugador(Color.VERDE);
-		    System.out.println("Has elegido el color verde.\n");
-			break;
-		default: System.out.println("que haces");
-		    addJugador();
-		}
-		jaux.JugadorNormal();
-		//jaux.JugadorIA();
-		this.jugador = jaux;*/
-	}
-
     public void addJugadores() {
+    	vista.welcolme();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Cuantos jugadores quieres\n");
-        nJugadores = sc.nextInt();
+        nJugadores = vista.askNumeroJugadores();
         ArrayList<Color> colores = new ArrayList<Color>(Arrays.asList(Color.values()));
         for(int i = 0; i < nJugadores; i++) {
             Jugador jugadorAux = null;
-            System.out.println("El jugador-" + i );
-            System.out.println("De que color lo quieres?");
+            int j = i+1;
+            
+            int opcion = vista.askColor(j, colores);
             int n = 1;
-            for(Color color: colores) {
-                System.out.println(n+"-"+color.toString());
-                n++;
-            }
-            int opcion = sc.nextInt();
-            n = 1;
             for(Color color: colores) {
                 if(n==opcion) {
                     jugadorAux = new Jugador(color);
@@ -92,9 +61,8 @@ public void addJugador(){
                 }
                 n++;
             }
-            System.out.println("De que tipo lo quieres?");
-            System.out.println("1.Normal\n2.Ia\n");
-            opcion = sc.nextInt();
+            
+            opcion = vista.askTipoJugador();
             if(opcion == 1) {
                 jugadorAux.JugadorNormal();
             } else if (opcion == 2) {
@@ -113,25 +81,31 @@ public void addJugador(){
 		ArrayList<Casilla> listaCasillasConFichas;
 		
 		while(!end()) {
-            jugadorActual = jugadores.get(0);
-			Scanner sc = new Scanner(System.in);
-			pressAnyKeyToContinue();
-			resultadoDado = dado.tirarDado();
-			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
-				this.tablero.addFichaAlJuego(jugadorActual.getColor());
-			}else{
-				if(this.tablero.getFichasEnJuego()>0) {
-                    jugadorActual.imprimirLocalizacionFichasJugador();
-					listaCasillasConFichas = this.iterator.recorrer(jugadorActual.getColor());
-					int eleccion = this.jugadorActual.eleccion();
-					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
-					this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
-					
-				}
-				
-				//this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), jugador.getColor(), resultadoDado);
-				
-			}
+            for(Jugador jugador: jugadores) {
+                jugadorActual = jugador;
+                vista.turnoJugador(jugadorActual);
+                if(jugador.tipoJ.toString() == "Normal") {
+                    Scanner sc = new Scanner(System.in);
+                    vista.pressAnyKeyToContinue();
+                    resultadoDado = dado.tirarDado();
+
+                    if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
+                        this.tablero.addFichaAlJuego(jugadorActual.getColor());
+                    }else{
+                        listaCasillasConFichas = this.iterator.recorrer(jugadorActual.getColor());
+                    if(listaCasillasConFichas.size() > 0) {
+                            jugadorActual.imprimirLocalizacionFichasJugador();
+
+                            int eleccion = this.jugadorActual.eleccion();
+                            this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
+
+                        }
+
+                        //this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), jugador.getColor(), resultadoDado);
+
+                    }
+                }
+            }
 		}
 	}
 	
@@ -149,25 +123,6 @@ public void addJugador(){
 			return false;
 		}
 	}
-	
-	/**
-	 * Funcion auxiliar para esperar hasta que el jugador pulse ENTER.
-	 * 
-	 */
-	private void pressAnyKeyToContinue()
-	 { 
-	        System.out.println("Pulsa ENTER para tirar el dado.\n");
-	        try
-	        {
-	            System.in.read();
-	        }  
-	        catch(Exception e)
-	        {}  
-	 }
 }
 
-enum TipoJugador{
-    IA,
-    Normal
-};
 

@@ -32,7 +32,7 @@ public class Dado {
 */			
 public int tirarDado() {
 	int n = random.nextInt(6)+1;
-	System.out.println("Has sacado:" + n);
+	Vista.resultadoDado(n);
 	return n;
 	}
 }

@@ -9,14 +9,6 @@ public class JugadorNormal implements ITipoJugador{
     }
     
     public int eleccion(Color color, int fichasEnJuego) {
-    	System.out.println("¿Cual quieres mover?");
-		Scanner scc = new Scanner(System.in);
-		int i = scc.nextInt(); 
-		if(i<=fichasEnJuego) {
-			System.out.println("Jugador-"+color+"- muevo la ficha numero: "+i);
-			return i;
-		} else {
-			return 0;
-		}
+    	return Vista.eleccionFicha(color,fichasEnJuego);
     }
 }
