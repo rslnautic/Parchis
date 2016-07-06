@@ -11,7 +11,7 @@ package Parchis;
 public class Main {	
 	public static void main(String[] args) {
 		Parchis parchis = new Parchis();
-		parchis.addJugador();
+		parchis.addJugadores();
 		parchis.play();
 		
 		/*Jugador asd = new Jugador(Color.ROJO);

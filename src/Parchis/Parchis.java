@@ -1,4 +1,5 @@
 package Parchis;
+import javax.sound.midi.SysexMessage;
 import java.io.*;
 import java.util.*;
 
@@ -13,7 +14,9 @@ import java.util.*;
 public class Parchis {
 	
 	private Tablero tablero;
-	private Jugador jugador;
+    private int nJugadores;
+	private Jugador jugadorActual;
+    private ArrayList<Jugador> jugadores;
 	private Dado dado;
 	private Iterador iterator;
 	private int resultadoDado;
@@ -28,6 +31,7 @@ public class Parchis {
 		tablero = Tablero.crearInstacia();
 		dado = Dado.crearDado();
 		this.iterator = new Iterador();
+        this.jugadores = new ArrayList();
 	}// Cierre del constructor
 	
 	
@@ -37,7 +41,7 @@ public class Parchis {
 	 * @param ninguno 
 	 */
 public void addJugador(){
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		System.out.println("Bienvenido al Parchis\n¿Con que color quieres jugar?\n");
 		System.out.println("1.Rojo\n2.Azul\n3.Amarillo\n4.Verde\n");
 		int i = -1;
@@ -45,24 +49,60 @@ public void addJugador(){
 		Jugador jaux = null;
 		switch(i){
 		case 1: jaux = new Jugador(Color.ROJO);
-		System.out.println("Has elegido el color rojo.\n");
+		    System.out.println("Has elegido el color rojo.\n");
 			break;
 		case 2: jaux = new Jugador(Color.AZUL);
-		System.out.println("Has elegido el color azul.\n");
+		    System.out.println("Has elegido el color azul.\n");
 			break;
 		case 3: jaux = new Jugador(Color.AMARILLO);
-		System.out.println("Has elegido el color amarillo.\n");
+		    System.out.println("Has elegido el color amarillo.\n");
 			break;
 		case 4: jaux = new Jugador(Color.VERDE);
-		System.out.println("Has elegido el color verde.\n");
+		    System.out.println("Has elegido el color verde.\n");
 			break;
 		default: System.out.println("que haces");
-		addJugador();
+		    addJugador();
 		}
 		jaux.JugadorNormal();
 		//jaux.JugadorIA();
-		this.jugador = jaux;
+		this.jugador = jaux;*/
 	}
+
+    public void addJugadores() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Cuantos jugadores quieres\n");
+        nJugadores = sc.nextInt();
+        ArrayList<Color> colores = new ArrayList<Color>(Arrays.asList(Color.values()));
+        for(int i = 0; i < nJugadores; i++) {
+            Jugador jugadorAux = null;
+            System.out.println("El jugador-" + i );
+            System.out.println("De que color lo quieres?");
+            int n = 1;
+            for(Color color: colores) {
+                System.out.println(n+"-"+color.toString());
+                n++;
+            }
+            int opcion = sc.nextInt();
+            n = 1;
+            for(Color color: colores) {
+                if(n==opcion) {
+                    jugadorAux = new Jugador(color);
+                    colores.remove(color);
+                    break;
+                }
+                n++;
+            }
+            System.out.println("De que tipo lo quieres?");
+            System.out.println("1.Normal\n2.Ia\n");
+            opcion = sc.nextInt();
+            if(opcion == 1) {
+                jugadorAux.JugadorNormal();
+            } else if (opcion == 2) {
+                jugadorAux.JugadorIA();
+            }
+            jugadores.add(jugadorAux);
+        }
+    }
 	/**
 	 * Bucle principal del juego en el cual se suceden las tiradas del dado y se piden 
 	 * por consola las decisiones que el jugador puede tomar.
@@ -73,16 +113,17 @@ public void addJugador(){
 		ArrayList<Casilla> listaCasillasConFichas;
 		
 		while(!end()) {
+            jugadorActual = jugadores.get(0);
 			Scanner sc = new Scanner(System.in);
 			pressAnyKeyToContinue();
 			resultadoDado = dado.tirarDado();
 			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
-				this.tablero.addFichaAlJuego(jugador.getColor());
+				this.tablero.addFichaAlJuego(jugadorActual.getColor());
 			}else{
 				if(this.tablero.getFichasEnJuego()>0) {
-					jugador.imprimirLocalizacionFichasJugador();
-					listaCasillasConFichas = this.iterator.recorrer(jugador.getColor());
-					int eleccion = this.jugador.eleccion();
+                    jugadorActual.imprimirLocalizacionFichasJugador();
+					listaCasillasConFichas = this.iterator.recorrer(jugadorActual.getColor());
+					int eleccion = this.jugadorActual.eleccion();
 					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
 					this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
 					
@@ -124,3 +165,9 @@ public void addJugador(){
 	        {}  
 	 }
 }
+
+enum TipoJugador{
+    IA,
+    Normal
+};
+
