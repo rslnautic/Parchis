@@ -9,7 +9,7 @@ public class JugadorNormal implements ITipoJugador{
     }
     
     public int eleccion(Color color, int fichasEnJuego) {
-    	System.out.println("¿Cual quieres mover?");
+    	System.out.println("¿Cual quieres mover?"+"-"+color.toString());
 		Scanner scc = new Scanner(System.in);
 		int i = scc.nextInt(); 
 		if(i<=fichasEnJuego) {

@@ -10,10 +10,11 @@ import java.util.*;
  * @see <a href = "https://github.com/rslnautic/Parchis"
  */
 public class Jugador {
-	private Color color;
-	private Iterador iterador;
-	private int fichasEnJuego;
-	private ITipoJugador tipoJugador;
+	public Color color;
+	public Iterador iterador;
+	public int fichasEnJuego;
+	public ITipoJugador tipoJugador;
+	public tipo tipoJ;
 
 /**
  * Constructor de la clase Jugador
@@ -26,12 +27,14 @@ public class Jugador {
 	
 	public void JugadorNormal()
     {
+		tipoJ = tipo.Normal;
 		ITipoJugador jugadorNormal = new JugadorNormal();
 		setTipoJugador(jugadorNormal);
     }
  
     public void JugadorIA()
     {
+		tipoJ = tipo.Ia;
     	ITipoJugador jugadorIA = new JugadorIA();
     	setTipoJugador(jugadorIA);
     }
@@ -103,3 +106,8 @@ public ArrayList<Casilla> getCasillasConFichas() {
 		this.tipoJugador = tipoJugador;
 	}
 }
+
+enum tipo {
+	Normal,
+	Ia
+};

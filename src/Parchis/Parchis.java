@@ -75,7 +75,8 @@ public void addJugador(){
         ArrayList<Color> colores = new ArrayList<Color>(Arrays.asList(Color.values()));
         for(int i = 0; i < nJugadores; i++) {
             Jugador jugadorAux = null;
-            System.out.println("El jugador-" + i );
+            int j = i+1;
+            System.out.println("El jugador-" + j );
             System.out.println("De que color lo quieres?");
             int n = 1;
             for(Color color: colores) {
@@ -113,25 +114,32 @@ public void addJugador(){
 		ArrayList<Casilla> listaCasillasConFichas;
 		
 		while(!end()) {
-            jugadorActual = jugadores.get(0);
-			Scanner sc = new Scanner(System.in);
-			pressAnyKeyToContinue();
-			resultadoDado = dado.tirarDado();
-			if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
-				this.tablero.addFichaAlJuego(jugadorActual.getColor());
-			}else{
-				if(this.tablero.getFichasEnJuego()>0) {
-                    jugadorActual.imprimirLocalizacionFichasJugador();
-					listaCasillasConFichas = this.iterator.recorrer(jugadorActual.getColor());
-					int eleccion = this.jugadorActual.eleccion();
-					//this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
-					this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
-					
-				}
-				
-				//this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), jugador.getColor(), resultadoDado);
-				
-			}
+            for(Jugador jugador: jugadores) {
+                jugadorActual = jugador;
+                System.out.println("Turno jugador "+ jugadorActual.tipoJ.toString()+"-"+jugadorActual.color.toString());
+                if(jugador.tipoJ.toString() == "Normal") {
+                    Scanner sc = new Scanner(System.in);
+                    pressAnyKeyToContinue();
+                    resultadoDado = dado.tirarDado();
+
+                    if(resultadoDado == 5 && this.tablero.getFichasEnJuego() <= 4){
+                        this.tablero.addFichaAlJuego(jugadorActual.getColor());
+                    }else{
+                        listaCasillasConFichas = this.iterator.recorrer(jugadorActual.getColor());
+                    if(listaCasillasConFichas.size() > 0) {
+                            jugadorActual.imprimirLocalizacionFichasJugador();
+
+                            int eleccion = this.jugadorActual.eleccion();
+                            //this.tablero.moverFicha(listaCasillasConFichas.get(0).getFichas().get(0), listaCasillasConFichas.get(0).getPosicionActual(), resultadoDado);
+                            this.tablero.moverFicha(listaCasillasConFichas.get(eleccion-1).getFichas().get(0), listaCasillasConFichas.get(eleccion-1), resultadoDado);
+
+                        }
+
+                        //this.tablero.moverFicha(listaFichasJugador.get(jugador.eleccion()-1).getPosicionActual(), jugador.getColor(), resultadoDado);
+
+                    }
+                }
+            }
 		}
 	}
 	
@@ -166,8 +174,4 @@ public void addJugador(){
 	 }
 }
 
-enum TipoJugador{
-    IA,
-    Normal
-};
 
